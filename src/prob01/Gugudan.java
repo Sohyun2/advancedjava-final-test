@@ -7,13 +7,14 @@ public class Gugudan {
 	static int resultNumber = 0;
 	
 	public static void main( String[] args ) {
-		int l = randomize( 1, 9 );
-		int r = randomize( 1, 9 );
+		// 두 수의 랜던 값 구하기
+		int l = randomize( 1, 9 ); // 6
+		int r = randomize( 1, 9 ); // 9
 		
-		resultNumber = l * r;
+		resultNumber = l * r; // 랜덤 값의 정답
 
-		int[] answerNumbers = randomizeAnswers();
-		int loc = randomize( 0, 8 );
+		int[] answerNumbers = randomizeAnswers(); //{81, 12, 32, 18, 54, 4, 32, 6, 32}
+		int loc = randomize( 0, 8 ); // 정답을 배열 인덱스 중 어디에 넣을 것인지 랜덤하게 구함.
 		answerNumbers[ loc ] = resultNumber;
 		
 		System.out.println( l + " x " + r + " = ?" );
@@ -36,6 +37,14 @@ public class Gugudan {
 		//
 		//  이 부분에 적당한 코드를 작성합니다.  
 		//
+		
+		int answer = s.nextInt();
+		
+		if(resultNumber == answer) {
+			System.out.println("정답");
+		} else {
+			System.out.println("오답");
+		}
 	}
 
 	private static int randomize( int lNum, int rNum ) {
@@ -43,21 +52,24 @@ public class Gugudan {
         return random;
 	}
 	
+	// 9개의 정답을 랜덤하게 구하는 함수
 	private static int[] randomizeAnswers() {
 
 		final int COUNT_ANSWER_NUMBER = 9;
-		final int MAX_ANSWER_NUMBER = 81;
+		final int MAX_ANSWER_NUMBER = 81; // 랜덤 값의 최대 범위
 		
-		int[] boardNumbers = new int[ COUNT_ANSWER_NUMBER ];
-		int occupied = 0;
+		int[] boardNumbers = new int[ COUNT_ANSWER_NUMBER ]; //9개의 랜덤값을 저장하기 위한 배열 생성
+		int occupied = 0; 
 		
 		while( occupied < COUNT_ANSWER_NUMBER ) {
 			
 	        int random = ( int )( Math.random() * MAX_ANSWER_NUMBER ) + 1;
 	        
-	        boolean evaluted = false;
+	        boolean evaluted = false; // 배열에 담긴 값 중 random값과 같은 값이 있는지 확인하는 flag
+	        
+	        // 랜덤값 중에서 중복된 값이 있으면 다시 돌림
 	        for( int i = 0; i < occupied; i++ ) {
-	        	if( /* 이 부분에 적당 조건의 코드를 입력 합니다. */ ) {
+	        	if( resultNumber == boardNumbers[i] ) {
 	        		evaluted = true;
 	        		break;
 	        	}
